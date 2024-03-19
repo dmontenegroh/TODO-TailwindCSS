@@ -6,3 +6,13 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+npm install -D prettier-plugin-tailwindcss
+crear archivo prettier.config.cjs y agregar
+`module.exports = {
+    plugins: ['prettier-plugin-tailwindcss'],
+  }
+  `
+
+npm i -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
