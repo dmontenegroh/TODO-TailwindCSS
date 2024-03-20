@@ -16,3 +16,6 @@ crear archivo prettier.config.cjs y agregar
 
 npm i -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
+- [preview app] (https://fascinating-gumdrop-411e70.netlify.app/)
+- [FrontendMentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW/hub)
