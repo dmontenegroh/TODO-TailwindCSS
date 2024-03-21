@@ -73,6 +73,7 @@ const App = () => {
         />
 
         <TodoComputed
+          todos={filteredTodos()}
           computedItemsLeft={computedItemsLeft}
           clearCompleted={clearCompleted}
         />
