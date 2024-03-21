@@ -5,26 +5,104 @@ import TodoCreate from "./components/TodoCreate";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
 
-const initialStateTodos = [{}];
+const initialStateTodos = [
+  {
+    id: 1,
+    title: "Complete online JavaScript Curse",
+    completed: true,
+  },
+  {
+    id: 2,
+    title: "To to the gym",
+    completed: false,
+  },
+  {
+    id: 3,
+    title: "To to the supermarket",
+    completed: false,
+  },
+  {
+    id: 4,
+    title: "To to the friend's house",
+    completed: true,
+  },
+  {
+    id: 5,
+    title: "Made todo online",
+    completed: true,
+  },
+];
 
 const App = () => {
   const [todos, setTodos] = useState(initialStateTodos);
 
+  const createtodo = (title) => {
+    const newTodo = {
+      id: Date.now(),
+      title: title.trim(),
+      completed: false,
+    };
+    console.log(newTodo);
+    setTodos([...todos, newTodo]);
+  };
+
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const updateTodo = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const computedItemsLeft = todos.filter((todo) => !todo.completed).length;
+
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const [filter, setFilter] = useState("all");
+
+  const changeFilter = (filter) => setFilter(filter);
+
+  const filteredTodos = () => {
+    switch (filter) {
+      case "all":
+        return todos;
+      case "active":
+        return todos.filter((todo) => !todo.completed);
+      case "completed":
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-200 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
+    <div className="min-h-screen bg-gray-200 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat transition-all duration-1000 dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]">
       <Header />
 
       <main className="container mx-auto mt-8 px-4">
-        <TodoCreate />
+        <TodoCreate createtodo={createtodo} />
 
-        <TodoList />
+        <TodoList
+          todos={filteredTodos()}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
 
-        <TodoComputed />
+        <TodoComputed
+          computedItemsLeft={computedItemsLeft}
+          clearCompleted={clearCompleted}
+        />
 
-        <TodoFilter />
+        <TodoFilter changeFilter={changeFilter} filter={filter} />
       </main>
 
-      <footer className="mt-10 text-center">
+      <footer className="mt-10 text-center transition-all duration-1000 dark:text-gray-400">
         Drag and drop to reorder list
       </footer>
     </div>
