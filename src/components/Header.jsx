@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header
-      className="container mx-auto px-4 pt-8 "
+      className="container mx-auto px-4 pt-8 md:max-w-xl"
       // ref={refHeader}
     >
       <div className="flex justify-between">
